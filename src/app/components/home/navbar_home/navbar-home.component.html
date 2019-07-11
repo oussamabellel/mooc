@@ -1,28 +1,31 @@
-   <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <a href="/" class="navbar-brand d-flex w-50 mr-auto">Ecole-online</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
-           
-            <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
-                <li class="nav-item">
-                    <a class="nav-link" onclick="document.getElementById('id01').style.display='block'" style="width:auto;"><i class="fa fa-fw fa-user"></i> Connexion</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" onclick="document.getElementById('id02').style.display='block'" style="width: auto;"><i class="fas fa-user-plus"></i> Inscription</a>
-                </li>
-              
-            </ul>
-        </div>
-    </nav>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <a href="/" class="navbar-brand d-flex w-50 mr-auto">Ecole-online</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
+
+    <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+      <li class="nav-item">
+        <a class="nav-link" onclick="document.getElementById('id01').style.display='block'" style="width:auto;"><i
+            class="fa fa-fw fa-user"></i> Connexion</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" onclick="document.getElementById('id02').style.display='block'" style="width: auto;"><i
+            class="fas fa-user-plus"></i> Inscription</a>
+      </li>
+
+    </ul>
+  </div>
+</nav>
 
 <div id="id01" class="modal">
-  
-  <form class="modal-content animate" (submit)= "login($event)">
+
+  <form class="modal-content animate" (submit)="login($event)">
     <div class="imgcontainer">
-      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-      <img src="../../../../assets/img/user.png" alt="Avatar" class="avatar">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close"
+        title="Close Modal">&times;</span>
+      <img src="./img/user.png" alt="Avatar" class="avatar">
     </div>
 
     <div class="container">
@@ -31,29 +34,29 @@
 
       <label for="psw"><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="password" id="password" required>
-        
+
       <button type="submit">Login</button>
     </div>
 
     <div class="container" style="background-color:#f1f1f1">
 
-        <div *ngIf="error =='';then content"></div>
-        <ng-template #content></ng-template>
+      <div *ngIf="error =='';then content"></div>
+      <ng-template #content></ng-template>
 
-        <div *ngIf="error =='true'; then authfailure"> </div> 
-        <ng-template #authfailure>
-            <div class="alert alert-danger">
-                <strong>Error!</strong> {{ message }}
-              </div>
-        </ng-template>
+      <div *ngIf="error =='true'; then authfailure"> </div>
+      <ng-template #authfailure>
+        <div class="alert alert-danger">
+          <strong>Error!</strong> {{ message }}
+        </div>
+      </ng-template>
 
-        <div *ngIf="user; then authsucc"> </div> 
-        <ng-template #authsucc>
-            <div class="alert alert-success">
-                <strong>Success!</strong> {{ message }}
-              </div>
-        </ng-template>
-          
+      <div *ngIf="user; then authsucc"> </div>
+      <ng-template #authsucc>
+        <div class="alert alert-success">
+          <strong>Success!</strong> {{ message }}
+        </div>
+      </ng-template>
+
     </div>
   </form>
 </div>
@@ -61,82 +64,83 @@
 <!-- Register  -->
 
 <div id="id02" class="modal">
-  
-    <form class="modal-content animate" (submit)="register($event)">
-      <div class="imgcontainer">
-        <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
-        <img src="../../../../assets/img/user2.jpg" alt="Avatar" class="avatar">
+
+  <form class="modal-content animate" (submit)="register($event)">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id02').style.display='none'" class="close"
+        title="Close Modal">&times;</span>
+      <img src="../../../../assets/img/user2.jpg" alt="Avatar" class="avatar">
+    </div>
+
+    <div class="container">
+
+      <div class="form-check-inline">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" name="optradio" value="Teacher" id="radio">Enseigant
+        </label>
       </div>
-  
-      <div class="container">
-
-          <div class="form-check-inline">
-              <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="optradio" value="Teacher" id="radio">Enseigant
-              </label>
-            </div>
-            <div class="form-check-inline">
-              <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="optradio" value="Parent" >Parent
-              </label>
-            </div>
-            <div class="form-check-inline disabled">
-              <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="optradio" value="Student"  >Enfant
-              </label>
-            </div>
-           
-        <label for="uname"><b>Username</b></label>
-        <input type="text" name="username" id="user_username" required>
-  
-        <label for="psw"><b>Password</b></label>
-        <input type="password"  name="password" id="user_password" required>
-
-        <label for="psw"><b>Email</b></label>
-        <input type="email"  name="email" id="user_email" required>
-
-        <label for="psw"><b>Nom</b></label>
-        <input type="text" name="nom" id="user_nom" required>
-
-        <label for="psw"><b>Prenom</b></label>
-        <input type="text"  name="prenom" id="user_prenom" required>
-
-        <label for="psw"><b>Age</b></label>
-        <input type="number"  name="age" id="user_age" required>
-          
-        <button type="submit">Register</button>
+      <div class="form-check-inline">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" name="optradio" value="Parent">Parent
+        </label>
       </div>
+      <div class="form-check-inline disabled">
+        <label class="form-check-label">
+          <input type="radio" class="form-check-input" name="optradio" value="Student">Enfant
+        </label>
+      </div>
+
+      <label for="uname"><b>Username</b></label>
+      <input type="text" name="username" id="user_username" required>
+
+      <label for="psw"><b>Password</b></label>
+      <input type="password" name="password" id="user_password" required>
+
+      <label for="psw"><b>Email</b></label>
+      <input type="email" name="email" id="user_email" required>
+
+      <label for="psw"><b>Nom</b></label>
+      <input type="text" name="nom" id="user_nom" required>
+
+      <label for="psw"><b>Prenom</b></label>
+      <input type="text" name="prenom" id="user_prenom" required>
+
+      <label for="psw"><b>Age</b></label>
+      <input type="number" name="age" id="user_age" required>
+
+      <button type="submit">Register</button>
+    </div>
 
     <div class="container" style="background-color:#f1f1f1">
-        <div *ngIf="!data.error;then content"></div>
-        <ng-template #content></ng-template>
+      <div *ngIf="!data.error;then content"></div>
+      <ng-template #content></ng-template>
 
-        <div *ngIf="data.error =='true'; then authfailure"> </div> 
-        <ng-template #authfailure>
-            <div class="alert alert-danger">
-                <strong>Error!</strong> {{ message }}
-              </div>
-        </ng-template>
+      <div *ngIf="data.error =='true'; then authfailure"> </div>
+      <ng-template #authfailure>
+        <div class="alert alert-danger">
+          <strong>Error!</strong> {{ message }}
+        </div>
+      </ng-template>
 
-        <div *ngIf="data.error == 'false'; then authsucc"> </div> 
-        <ng-template #authsucc>
-            <div class="alert alert-success">
-                <strong>Success!</strong> {{ message }}
-              </div>
-        </ng-template>
+      <div *ngIf="data.error == 'false'; then authsucc"> </div>
+      <ng-template #authsucc>
+        <div class="alert alert-success">
+          <strong>Success!</strong> {{ message }}
+        </div>
+      </ng-template>
     </div>
-    </form>
-  </div>
+  </form>
+</div>
 
 <script>
   var modal = document.getElementById('id01');
   var modal_register = document.getElementById('id02');
-  window.onclick = function(event) {
-      if (event.target == modal) {
-          modal.style.display = "none";
-      }
-      if(event.target == modal_register){
-        modal_register.style.display = "none";
-      }
-}
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+    if (event.target == modal_register) {
+      modal_register.style.display = "none";
+    }
+  }
 </script>
