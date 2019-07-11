@@ -1,0 +1,51 @@
+<!-- 
+    <br>
+    <form #f = "ngForm">
+      <label>Username</label>
+      <input type="text" name="Username" [(ngModel)] = "selecteduser.username">
+  
+      <label>Password</label>
+      <input type="password" name="password" [(ngModel)] = "selecteduser.password">
+  
+      <label>email</label>
+      <input type="text" name="email" [(ngModel)] = "selecteduser.email">
+  
+      <label>nom</label>
+      <input type="text" name="nom" [(ngModel)] = "selecteduser.nom">
+  
+      <label>prenom</label>
+      <input type="text" name="prenom" [(ngModel)] = "selecteduser.prenom">
+  
+      <label>age</label>
+      <input type="text" name="age" [(ngModel)] = "selecteduser.age">
+  
+      <label>type</label>
+      <input type="text" name="type" [(ngModel)] = "selecteduser.type">
+    
+      
+      <input type="button" (click)="Create(f)" value="Create or Update Policy">
+    </form>
+   -->
+
+   <h1>Insurance Policy Management</h1>
+<div>
+
+  <table border='1' width='100%' style='border-collapse: collapse;'>
+    <tr>
+      <th>ID</th>
+      <th>Policy Number</th>
+      <th>Policy Amount</th>
+      <th>Operations</th>
+
+    </tr>
+
+    <tr *ngFor="let m of modules">
+      <td>{{ m.code }}</td>
+      <td>{{ m.matiere }}</td>
+      <td>{{ m.price }}</td>
+      <td>
+        <button (click)="deletePolicy(policy.id)">Delete</button>
+        <button (click)="selectPolicy(policy)">Update</button>
+      </td>
+    </tr>
+  </table>

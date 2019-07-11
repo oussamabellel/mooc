@@ -1,0 +1,54 @@
+<br>
+<br>
+<br>
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2"> <span style="font-size: 1em; color: cyan;">
+        <i class="fas fa-poll-h"></i>
+      </span> Mes Résultats</h1>
+  </div>
+
+  <div class="container">
+
+    <div *ngIf="Results?.length > 0; else elseBlock">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Identifiant du module</th>
+            <th>Nom de qcm</th>
+            <th>Date</th>
+            <th>Résultat</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <ng-container *ngFor="let result of Results">
+            <tr *ngIf="result.result < 50; else elseGood" class="table-danger">
+              <td> {{ result.id_module }} </td>
+              <td> {{ result.nom }} </td>
+              <td> {{ result.date }} </td>
+              <td> {{ result.result+"%" }} </td>
+            </tr>
+            <ng-template #elseGood>
+              <tr class="table-success">
+                <td> {{ result.id_module }} </td>
+                <td> {{ result.nom }} </td>
+                <td> {{ result.date }} </td>
+                <td> {{ result.result+"%" }} </td>
+              </tr>
+            </ng-template>
+          </ng-container>
+        </tbody>
+
+      </table>
+    </div>
+    <ng-template #elseBlock>
+      <div class="alert alert-primary">
+        <strong> Aucun Résultat </strong>
+      </div>
+    </ng-template>
+
+  </div>
+
+</main>
