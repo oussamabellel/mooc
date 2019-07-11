@@ -2,18 +2,20 @@
 
 require_once '../includes/DbOperations.php';
 
-$response = array(); 
+$postdata = file_get_contents("php://input");
+$response = array();
+$request = json_decode($postdata);
+$id = $_GET['id']; 
 
-if($_SERVER['REQUEST_METHOD']=='POST'){
-	if(isset($_POST['id_parent'])){
+	if(isset($id)){
 		$db = new DbOperations(); 
-		$response = $db->get_my_childrens($_POST['id_parent']);		
+		$response = $db->get_my_childrens($id);		
 	}
 
-}else{
-	$response['error'] = true; 
-	$response['message'] = "Invalid Request";
-}
+	else{
+		$response['error'] = true; 
+		$response['message'] = "Invalid Request";
+	}
 
 
 echo json_encode($response);
