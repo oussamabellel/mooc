@@ -1,3 +1,42 @@
-<p>
-  history works!
-</p>
+<br>
+<br>
+<br>
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2"> <span style="font-size: 1em; color: Tomato;">
+        <i class="fas fa-history"></i>
+      </span> Historique des opérations </h1>
+  </div>
+
+  <div class="container">
+
+    <div *ngIf="History?.length > 0; else elseBlock">
+
+      <table class="table table-hover">
+        <thead class="thead-light">
+          <tr>
+            <th>#</th>
+            <th>Type </th>
+            <th>Date</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let history of History">
+            <td> {{ history.id }} </td>
+            <td> {{ history.type }} </td>
+            <td> {{ history.value }} </td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+
+    <ng-template #elseBlock>
+      <div class="alert alert-primary">
+        <strong> Aucun Résultat </strong>
+      </div>
+    </ng-template>
+  </div>
+
+</main>

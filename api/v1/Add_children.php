@@ -3,7 +3,12 @@
 
 require_once '../includes/DbOperations.php';
 
-$response = array(); 
+$postdata = file_get_contents("php://input");
+$response = array();
+$_POST = json_decode($postdata, true);
+$id = $_GET['id'];
+$credits = $_GET['credits'];
+
 
 if($_SERVER['REQUEST_METHOD']=='POST'){
 	if(
@@ -43,9 +48,9 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 		$response['message'] = "Required fields are missing";
 	}
 			$user = $db->getUserByUsername($_POST['username']);
-			$result = $db->Add_to_family($_POST['id_parent'],
+			$result = $db->Add_to_family($id,
 										$user['id'],
-										$_POST['credits']);
+										$credits);
 
 		if($result == 1){
 			$response['error'] = false; 

@@ -318,7 +318,7 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 			$stmt = $this->con->prepare("SELECT * FROM historique WHERE id_personne = ?");
 			$stmt->bind_param("i",$id_personne);
 			$stmt->execute();
-			$stmt->bind_result($idperonne,$id,$type,$value);
+			$stmt->bind_result($id,$idperonne,$type,$value);
 			$users = array();
 			while ($stmt->fetch()){
 				$user=array();

@@ -29,10 +29,6 @@ export class ProfilComponent implements OnInit {
     const age = target.querySelector('#age').value
     const password = target.querySelector('#password').value
 
-
-
-
-
   }
 
 }

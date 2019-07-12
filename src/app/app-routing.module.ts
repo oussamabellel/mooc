@@ -23,6 +23,8 @@ import { createComponent } from '@angular/compiler/src/core';
 import { ChildchartsComponent } from './components/parent/childcharts/childcharts.component';
 import { CreateaccountComponent } from './components/parent/createaccount/createaccount.component';
 import { HistoryComponent } from './components/parent/history/history.component';
+import { ChildrenresultComponent } from './components/parent/childrenresult/childrenresult.component';
+import { AddcreditsComponent } from './components/parent/addcredits/addcredits.component';
 
 const routes: Routes = [
 
@@ -51,11 +53,13 @@ const routes: Routes = [
       { path: '', component: ChildconnexionComponent, pathMatch: 'full' },
       { path: 'childconx', component: ChildconnexionComponent },
       { path: 'childresults', component: ChildresultsComponent },
+      { path: 'childresults/:id', component: ChildrenresultComponent },
       { path: 'childcharts', component: ChildchartsComponent },
       { path: 'create', component: CreateaccountComponent },
       { path: 'associate', component: AssochildComponent },
       { path: 'profil', component: ProfilComponent },
-      { path: 'history', component: HistoryComponent }
+      { path: 'history', component: HistoryComponent },
+      { path: 'addcredits', component: AddcreditsComponent }
     ]
   },
   {

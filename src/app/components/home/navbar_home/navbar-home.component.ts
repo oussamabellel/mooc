@@ -10,61 +10,60 @@ import { users } from 'src/app/model/users';
 })
 export class NavbarHomeComponent implements OnInit {
 
-  user:any;
+  user: any;
   error = "";
   message = "";
 
-
-    data = {
+  data = {
     error: null,
-     message: null
-   };
-  
+    message: null
+  };
+
   constructor(private apiService: ApiService, private router: Router) { }
 
   ngOnInit() {
   }
 
-  login(event){
-    
+  login(event) {
+
     event.preventDefault()
     const target = event.target
     const username = target.querySelector('#username').value
     const password = target.querySelector('#password').value
-    console.log(username +" "+ password);
+    console.log(username + " " + password);
 
     this.apiService.userlogin(username, password).subscribe(data => {
-       if (data.error){
-         localStorage.removeItem('loggedin');
-         this.error = String(data.error);
-         this.message = data.message;
-       } else {
+      if (data.error) {
+        localStorage.removeItem('loggedin');
+        this.error = String(data.error);
+        this.message = data.message;
+      } else {
         localStorage.setItem('user', JSON.stringify(data));
-      
+
         this.user = data;
         this.error = String(data.error);
         this.message = "Authentification sucesss";
         this.apiService.setLoggedIn(true);
-        
-      setTimeout(() => {
-        if (data.type == "Teacher"){
-          this.router.navigate(['teacher']);
-        }
-        if (data.type == "Student"){
-          this.router.navigate(['student']);
-        }
-        if (data.type == "Parent"){
-          this.router.navigate(['parent']);
 
-        }
-      }, 500);
-        
-       }
+        setTimeout(() => {
+          if (data.type == "Teacher") {
+            this.router.navigate(['teacher']);
+          }
+          if (data.type == "Student") {
+            this.router.navigate(['student']);
+          }
+          if (data.type == "Parent") {
+            this.router.navigate(['parent']);
+
+          }
+        }, 500);
+
+      }
     })
   }
 
-  register(event){
-  
+  register(event) {
+
     event.preventDefault()
     const target = event.target
     const radio = target.querySelector('input[name=optradio]:checked').value
@@ -81,8 +80,8 @@ export class NavbarHomeComponent implements OnInit {
     })
 
 
-    
-    
+
+
   }
 
 }

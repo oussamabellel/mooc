@@ -36,6 +36,8 @@ import { AssochildComponent } from './components/parent/assochild/assochild.comp
 import { HistoryComponent } from './components/parent/history/history.component';
 import { LoginComponent } from './components/login/login.component';
 import { from } from 'rxjs';
+import { ChildrenresultComponent } from './components/parent/childrenresult/childrenresult.component';
+import { AddcreditsComponent } from './components/parent/addcredits/addcredits.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,6 +67,8 @@ import { from } from 'rxjs';
     AssochildComponent,
     HistoryComponent,
     LoginComponent,
+    ChildrenresultComponent,
+    AddcreditsComponent,
 
   ],
   imports: [

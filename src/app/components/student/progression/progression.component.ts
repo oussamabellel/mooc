@@ -25,8 +25,6 @@ export class ProgressionComponent implements OnInit {
 
   }
 
-
-
   ngOnInit() {
 
     this.apistudent.getMyResult(this.user.id).subscribe((Results: result[]) => {
