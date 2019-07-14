@@ -47,7 +47,7 @@ export class ChildrenresultComponent implements OnInit, AfterViewInit {
           }
         }
       });
-    }, 2000)
+    }, 2500)
 
   }
 

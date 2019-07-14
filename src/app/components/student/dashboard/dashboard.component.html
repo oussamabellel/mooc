@@ -82,4 +82,53 @@
 
       </div>
     </div>
+    <hr>
+    <h2> Derniers cours ajoutés </h2>
+    <table class="table table-hover">
+      <thead class="thead-light">
+        <tr>
+          <th>Matiere</th>
+          <th>Nom</th>
+          <th>Type</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let cour of Cours">
+
+          <td>{{ cour.matiere }}</td>
+          <td>{{ cour.nom }}</td>
+          <td *ngIf="cour.type == 'pdf'"> <span style="font-size: 2em; color: Tomato;">
+              <i class="far fa-file-pdf"></i>
+            </span> </td>
+          <td *ngIf="cour.type == 'video'"> <i class="fas fa-video"></i> </td>
+          <td><button type="submit" name="button" value="{{cour.lien}}" (click)="open(cour.lien)"
+              class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Open</button></td>
+        </tr>
+      </tbody>
+
+    </table>
+    <hr>
+    <h2> Derniere video ajoutés </h2>
+    <br>
+    <div class="container-fluid pb-video-container">
+      <div class="col-md-12 col-md-offset-1">
+        <div class="row pb-row">
+          <div class="col-md-4 pb-video">
+            <iframe width="100%" height="230" src="https://www.youtube.com/embed/XpB4SZCgIv0" frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="col-md-4 pb-video">
+            <iframe width="100%" height="230" src="https://www.youtube.com/embed/Mng0OB3JHmg" frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="col-md-4 pb-video">
+            <iframe width="100%" height="230" src="https://www.youtube.com/embed/M6pi6jXpRrs" frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>

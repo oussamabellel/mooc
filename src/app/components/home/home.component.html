@@ -1,2 +1,71 @@
 <app-navbar-home></app-navbar-home>
+<!-- 
+<div id="demo" class="carousel slide" data-ride="carousel">
+    <ul class="carousel-indicators">
+        <li data-target="#demo" data-slide-to="0" class="active"></li>
+        <li data-target="#demo" data-slide-to="1"></li>
+        <li data-target="#demo" data-slide-to="2"></li>
+    </ul>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="https://www.archimag.com/sites/archimag.com/files/styles/article/public/web_articles/image/bibpublique_stokholm.jpg?itok=E47gGaDp"
+                alt="Los Angeles" width="1100" height="500">
+            <div class="carousel-caption">
+                <h3>Los Angeles</h3>
+                <p>We had such a great time in LA!</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="https://www.kiddiematters.com/wp-content/uploads/2017/03/Depositphotos_61894645_original-1024x708.jpg"
+                alt="Chicago" width="1100" height="500">
+            <div class="carousel-caption">
+                <h3>Chicago</h3>
+                <p>Thank you, Chicago!</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="https://www.sciencenewsforstudents.org/sites/default/files/main/articles/860-math-anxiety-headeriStock_000007678220_Full.jpg"
+                alt="New York" width="1100" height="500">
+            <div class="carousel-caption">
+                <h3>New York</h3>
+                <p>We love the Big Apple!</p>
+            </div>
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#demo" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </a>
+</div> -->
 
+<ngb-carousel>
+
+    <ng-template ngbSlide>
+        <img src="https://www.sciencenewsforstudents.org/sites/default/files/main/articles/860-math-anxiety-headeriStock_000007678220_Full.jpg"
+            alt="Random second slide" width="1500" height="800">
+        <div class="carousel-caption">
+            <h3>Second slide label</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+    </ng-template>
+
+    <ng-template ngbSlide>
+        <img src="https://www.archimag.com/sites/archimag.com/files/styles/article/public/web_articles/image/bibpublique_stokholm.jpg?itok=E47gGaDp"
+            alt="Random first slide" width="1500" height="800">
+        <div class="carousel-caption">
+            <h3>First slide label</h3>
+            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+        </div>
+    </ng-template>
+
+    <ng-template ngbSlide>
+        <img src="https://www.kiddiematters.com/wp-content/uploads/2017/03/Depositphotos_61894645_original-1024x708.jpg"
+            alt="Random third slide" width="1500" height="800">
+        <div class="carousel-caption">
+            <h3>Third slide label</h3>
+            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+        </div>
+    </ng-template>
+</ngb-carousel>

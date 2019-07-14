@@ -65,7 +65,7 @@ export class ProgressionComponent implements OnInit {
         }
       });
 
-    }, 2000);
+    }, 2500);
 
 
 

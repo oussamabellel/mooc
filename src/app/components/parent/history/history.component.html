@@ -10,7 +10,7 @@
 
   <div class="container">
 
-    <div *ngIf="History?.length > 0; else elseBlock">
+    <div *ngIf="History?.length > 0 && History">
 
       <table class="table table-hover">
         <thead class="thead-light">
@@ -32,11 +32,10 @@
       </table>
     </div>
 
-    <ng-template #elseBlock>
-      <div class="alert alert-primary">
-        <strong> Aucun Résultat </strong>
-      </div>
-    </ng-template>
+    <div *ngIf="!History" class="alert alert-primary">
+      <strong> Aucun Résultat </strong>
+    </div>
+
   </div>
 
 </main>

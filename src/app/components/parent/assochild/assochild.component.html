@@ -9,6 +9,16 @@
   </div>
 
   <div class="container">
+    <br>
+    <br>
+    <form (submit)="Associer($event)" class="center">
+
+      <div class="form-group">
+        <label>ID:</label>
+        <input type="text" class="form-control" [(ngModel)]="user.id" id="id" name="id">
+      </div>
+      <button type="submit" class="btn btn-primary"> <i class="fas fa-user-check"></i> Associer</button>
+    </form>
   </div>
 
 </main>
