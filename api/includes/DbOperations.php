@@ -487,11 +487,12 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 				}
 		}
 
-		public function ModifyProfile($id_personne, $nom, $prenom, $age, $email)
+		public function ModifyProfile($id_personne, $nom, $prenom, $age, $password)
 		{
 			# code...
-			$stmt = $this->con->prepare("UPDATE `users` SET nom = ?, prenom = ?, age = ?, email = ? WHERE id = ?");
-			$stmt->bind_param("ssisi",$nom,$prenom,$age,$email,$id_personne);
+			$pass = md5($password);
+			$stmt = $this->con->prepare("UPDATE `users` SET nom = ?, prenom = ?, age = ?, password = ? WHERE id = ?");
+			$stmt->bind_param("ssisi",$nom,$prenom,$age,$pass,$id_personne);
 			if ($stmt->execute()){
 					return 1;
 				}else{

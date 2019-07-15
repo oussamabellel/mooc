@@ -3,12 +3,15 @@
 
 require_once '../includes/DbOperations.php';
 
-$response = array(); 
+$postdata = file_get_contents("php://input");
+$response = array();
+$_POST = json_decode($postdata, true);
+$id = $_GET['id'];
 
 if($_SERVER['REQUEST_METHOD']=='POST'){
 	if(
-		isset($_POST['id_etudiant']) and 
-			isset($_POST['id_module']) and
+		isset($id) and 
+			isset($_POST['id']) and
 				isset($_POST['price']))
 		{
 		//operate the data further 
@@ -16,11 +19,11 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 		$db = new DbOperations(); 
 
 		$result = $db->BuyModule(
-									$_POST['id_etudiant'],
-									$_POST['id_module']
+									$id,
+									$_POST['id']
 								);
 
-		$parent = $db->getParent($_POST['id_etudiant']);
+		$parent = $db->getParent($id);
 
 		$result2 = $db->RetraitCredit(
 									$parent['id_parent'],

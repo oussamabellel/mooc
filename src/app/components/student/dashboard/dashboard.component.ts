@@ -19,10 +19,11 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.apistudent.getLastCours(this.user.id).subscribe((Cours: cours[]) => {
       this.Cours = Cours;
-      Cours.forEach(element => {
-        console.log(element.id);
-      });
     })
+  }
+
+  open(link) {
+    window.open(link, '_blank');
   }
 
 }

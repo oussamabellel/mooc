@@ -5,10 +5,10 @@
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2"> <span style="font-size: 1em; color: blue;">
         <i class="fas fa-cart-plus"></i> </span> Acheter des cours</h1>
+    <h4> <i class="fas fa-money-check-alt"></i> Crédits : {{ user.credits | currency }}</h4>
   </div>
 
   <div class="container">
-
     <table class="table table-hover">
       <thead class="thead-light">
         <tr>
@@ -18,10 +18,8 @@
           <th></th>
         </tr>
       </thead>
-
       <tbody>
         <tr *ngFor="let module of modules">
-
           <td>
             <span style="font-size: 1em; color:saddlebrown;">
               <i class="fas fa-folder-open"></i>
@@ -29,12 +27,20 @@
           </td>
           <td>{{ module.matiere }}</td>
           <td>{{ module.price | currency }}</td>
-          <td><button type="submit" name="button" value="{{module.id}}" (click)="open(module.id)"
+          <td><button type="submit" name="button" value="{{module.id}}" (click)="Buy(module)"
               class="btn btn-primary btn-sm"> <i class="fas fa-shopping-cart"></i> Buy</button></td>
         </tr>
       </tbody>
 
     </table>
+
+    <div *ngIf="data && !data.error" class="alert alert-success">
+      <strong>Success!</strong> {{ data.message }}
+    </div>
+
+    <div *ngIf="data && data.error" class="alert alert-danger">
+      <strong>Error!</strong> {{ data.message }}
+    </div>
 
   </div>
 </main>

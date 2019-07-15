@@ -21,27 +21,18 @@ export class ProgressionComponent implements OnInit {
   Results: result[];
   user: users = JSON.parse(localStorage.getItem('user'));
 
-  constructor(private apistudent: StudentService) {
-
-  }
+  constructor(private apistudent: StudentService) { }
 
   ngOnInit() {
-
     this.apistudent.getMyResult(this.user.id).subscribe((Results: result[]) => {
       this.Results = Results;
       Results.forEach(element => {
-
         this.Labs.push(element.id_module);
         this.Res.push(element.result);
-        console.log(this.Labs);
-        console.log(this.Res);
-        console.log(element);
       });
     });
 
-
     setTimeout(() => {
-
       this.chart = new Chart('myChart', {
         type: 'line',
         data: {
@@ -65,10 +56,7 @@ export class ProgressionComponent implements OnInit {
         }
       });
 
-    }, 2500);
-
-
-
+    }, 2250);
   }
 
 }

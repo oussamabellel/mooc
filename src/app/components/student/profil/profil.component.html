@@ -41,6 +41,16 @@
       <button type="submit" class="btn btn-primary"><i class="far fa-check-square"></i> Submit</button>
     </form>
 
+    <br>
+
+    <div *ngIf="data && !data.error" class="alert alert-success">
+      <strong>Success!</strong> {{ data.message }}
+    </div>
+
+    <div *ngIf="data && data.error" class="alert alert-danger">
+      <strong>Error!</strong> {{ data.message }}
+    </div>
+
   </div>
 
 </main>

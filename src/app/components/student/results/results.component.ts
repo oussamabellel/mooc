@@ -19,9 +19,6 @@ export class ResultsComponent implements OnInit {
 
     this.apistudent.getMyResult(this.user.id).subscribe((Results: result[]) => {
       this.Results = Results;
-      Results.forEach(element => {
-        console.log(element);
-      });
     })
   }
 

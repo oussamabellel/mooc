@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { users } from './model/users'
 import { catchError } from 'rxjs/operators';
 import { cours } from './model/cours';
+import { response } from './model/response';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,10 @@ export class ApiService {
   }
   getAllModules(): Observable<module[]> {
     return this.httpClient.get<module[]>(`${this.PHP_API_SERVER}/v1/get_all_modules.php`); // catch error;
+  }
+
+  ModifiyProfil(user: users) {
+    return this.httpClient.post<response>(`${this.PHP_API_SERVER}/v1/modify_profile.php?id=${user.id}`, user);
   }
 
   userregister(username, password, email, nom, prenom, age, type) {

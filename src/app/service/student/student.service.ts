@@ -4,6 +4,7 @@ import { module } from '../../model/module';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { result } from 'src/app/model/result';
+import { response } from 'src/app/model/response';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,10 @@ export class StudentService {
 
   getMyResult(id): Observable<result[]> {
     return this.httpClient.get<result[]>(`${this.PHP_API_SERVER}/v1/getmyresult.php?id=${id}`);
+  }
+
+  BuyModule(id_personne, module: module): Observable<response> {
+    return this.httpClient.post<response>(`${this.PHP_API_SERVER}/v1/Buy_module.php?id=${id_personne}`, module);
   }
 
 
