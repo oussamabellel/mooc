@@ -19,9 +19,6 @@ export class ChildresultsComponent implements OnInit {
   ngOnInit() {
     this.apiparent.getAllChildrens(this.user.id).subscribe((Childrens: users[]) => {
       this.Childrens = Childrens;
-      Childrens.forEach(element => {
-        console.log(element.prenom);
-      });
     })
   }
 

@@ -6,6 +6,7 @@
     <h1 class="h2"> <span style="font-size: 1em; color: darkgrey;">
         <i class="far fa-credit-card"></i>
       </span> Ajouter crédits</h1>
+    <h4> <i class="fas fa-money-check-alt"></i> Crédits : {{ user.credits | currency }}</h4>
   </div>
 
   <div class="container">
@@ -84,9 +85,15 @@
         <button class="btn btn-primary btn-lg btn-block" type="submit"><i class="fas fa-shopping-cart"></i>
           Payer</button>
 
-
       </form>
+      <br>
+      <div *ngIf="data && !data.error" class="alert alert-success">
+        <strong>Success!</strong> {{ data.message }}
+      </div>
 
+      <div *ngIf="data && data.error" class="alert alert-danger">
+        <strong>Error!</strong> {{ data.message }}
+      </div>
 
     </div>
 

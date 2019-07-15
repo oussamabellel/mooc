@@ -3,7 +3,9 @@
 
 require_once '../includes/DbOperations.php';
 
-$response = array(); 
+$postdata = file_get_contents("php://input");
+$response = array();
+$_POST = json_decode($postdata, true);
 
 if($_SERVER['REQUEST_METHOD']=='POST'){
 	if(isset($_POST['id_enfant']) and 

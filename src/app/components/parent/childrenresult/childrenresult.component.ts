@@ -51,61 +51,16 @@ export class ChildrenresultComponent implements OnInit, AfterViewInit {
 
   }
 
-
   ngOnInit() {
 
     this.id = parseInt(this.route.snapshot.paramMap.get('id'));
-    console.log(this.id);
-
     this.apistudent.getMyResult(this.id).subscribe((Results: result[]) => {
       this.Results = Results;
       Results.forEach(element => {
         this.Labs.push(element.id_module);
         this.Res.push(element.result);
-        console.log(element);
       });
     });
 
   }
-
-  // setTimeout(() => {
-
-  //   // this.apistudent.getMyResult(this.id).subscribe((Results: result[]) => {
-  //   //   this.Results = Results;
-  //   //   Results.forEach(element => {
-
-
-  //   //     console.log(this.Labs);
-  //   //     console.log(this.Res);
-  //   //     console.log(element);
-  //   //   });
-  //   // });
-
-  //   this.chart = new Chart('myChart', {
-  //     type: 'line',
-  //     data: {
-  //       labels: this.Labs,
-  //       datasets: [{
-  //         data: this.Res,
-  //         backgroundColor: 'transparent',
-  //         borderColor: '#007bff',
-  //         borderWidth: 4
-  //       }]
-  //     },
-  //     options: {
-
-  //       scales: {
-  //         yAxes: [{
-  //           ticks: {
-  //             beginAtZero: true
-  //           }
-  //         }]
-  //       }
-  //     }
-  //   });
-
-  // }, 4000);
-
-
-
 }

@@ -29,4 +29,8 @@ export class ParentService {
   CreateChildrenAccount(user: users, id, credits): Observable<response> {
     return this.httpClient.post<response>(`${this.PHP_API_SERVER}/v1/Add_children.php?id=${id}&credits=${credits}`, user);
   }
+
+  Associate(data): Observable<response> {
+    return this.httpClient.post<response>(`${this.PHP_API_SERVER}/v1/associer_parent.php?`, data);
+  }
 }

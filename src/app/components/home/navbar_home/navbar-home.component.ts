@@ -30,8 +30,6 @@ export class NavbarHomeComponent implements OnInit {
     const target = event.target
     const username = target.querySelector('#username').value
     const password = target.querySelector('#password').value
-    console.log(username + " " + password);
-
     this.apiService.userlogin(username, password).subscribe(data => {
       if (data.error) {
         localStorage.removeItem('loggedin');
@@ -78,10 +76,6 @@ export class NavbarHomeComponent implements OnInit {
       this.message = data.message;
       this.data.error = String(data.error);
     })
-
-
-
-
   }
 
 }

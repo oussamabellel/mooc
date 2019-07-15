@@ -17,7 +17,6 @@ export class CreateaccountComponent implements OnInit {
   constructor(private httpClient: HttpClient, private apiparent: ParentService) { }
 
   ngOnInit() {
-    console.log(this.user.credits);
   }
 
   Create(event) {

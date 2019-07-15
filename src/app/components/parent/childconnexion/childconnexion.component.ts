@@ -21,9 +21,6 @@ export class ChildconnexionComponent implements OnInit {
 
     this.apiparent.getChildrenLastConnexion(this.user.id).subscribe((Connexions: connexion[]) => {
       this.Connexions = Connexions;
-      Connexions.forEach(element => {
-        console.log(element.nom, element.date);
-      });
     })
   }
 
