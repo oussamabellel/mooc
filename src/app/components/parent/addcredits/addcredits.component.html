@@ -34,7 +34,7 @@
         <!-- CREDIT CARD FORM ENDS HERE -->
       </div>
 
-      <form (submit)="EditProfil($event)">
+      <form (submit)="AddCredit($event)">
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="cc-name">Name on card</label>
@@ -73,7 +73,7 @@
 
           <div class="col-md-3 mb-3">
             <label for="cc-expiration">Amount</label>
-            <input type="text" class="form-control" id="cc-expiration" placeholder="" required="">
+            <input type="text" class="form-control" id="amount" placeholder="" required="">
             <div class="invalid-feedback">
               Amount is required
             </div>
@@ -86,15 +86,18 @@
           Payer</button>
 
       </form>
-      <br>
-      <div *ngIf="data && !data.error" class="alert alert-success">
-        <strong>Success!</strong> {{ data.message }}
-      </div>
 
-      <div *ngIf="data && data.error" class="alert alert-danger">
-        <strong>Error!</strong> {{ data.message }}
-      </div>
 
+
+    </div>
+
+    <br>
+    <div *ngIf="data && !data.error" class="alert alert-success">
+      <strong>Success!</strong> {{ data.message }}
+    </div>
+
+    <div *ngIf="data && data.error" class="alert alert-danger">
+      <strong>Error!</strong> {{ data.message }}
     </div>
 
   </div>

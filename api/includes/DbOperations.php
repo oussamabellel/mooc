@@ -36,6 +36,35 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 			}
 		}
 
+			public function isUserExist($username, $email){
+			$stmt = $this->con->prepare("SELECT id FROM users WHERE username = ? OR email = ?");
+			$stmt->bind_param("ss", $username, $email);
+			$stmt->execute(); 
+			$stmt->store_result(); 
+			return $stmt->num_rows > 0; 
+		}
+
+		
+			public function isUserExistAjax_username($username){
+			// $stmt = $this->con->prepare("SELECT id FROM users WHERE username = ?");
+			// $stmt->bind_param("s", $username);
+			// $stmt->execute(); 
+			// $stmt->store_result(); 
+			// return $stmt->num_rows; 
+
+			$sql = "SELECT * FROM users WHERE username='$username'";
+			$results = mysqli_query($this->con, $sql);
+			return $results;
+		}
+
+		public function isUserExistAjax_email($email){
+			$stmt = $this->con->prepare("SELECT id FROM users WHERE email = ?");
+			$stmt->bind_param("s", $email);
+			$stmt->execute(); 
+			$stmt->store_result(); 
+			return $stmt->num_rows > 0; 
+		}
+
 		public function AddCours($nom, $type, $lien, $code_module){
 			
 				$stmt = $this->con->prepare("INSERT INTO `cours` (`id`, `nom`, `type`, `lien`, `code_module`) VALUES (NULL, ?, ?, ?, ?);");
@@ -77,13 +106,7 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 		}
 
 
-		private function isUserExist($username, $email){
-			$stmt = $this->con->prepare("SELECT id FROM users WHERE username = ? OR email = ?");
-			$stmt->bind_param("ss", $username, $email);
-			$stmt->execute(); 
-			$stmt->store_result(); 
-			return $stmt->num_rows > 0; 
-		}
+	
 
 		public function getAllusers()
 		{

@@ -20,7 +20,6 @@ export class ProfilComponent implements OnInit {
 
   EditProfil(event) {
 
-    console.log("yes");
     event.preventDefault()
     const target = event.target
 
@@ -34,14 +33,14 @@ export class ProfilComponent implements OnInit {
 
     console.log(editedUser);
 
-    this.apiService.ModifiyProfil(editedUser).subscribe((data: response) => {
-      this.data = data;
-      if (!data.error) {
-        this.apiService.userlogin(this.user.username, password).subscribe((data2: response) => {
-          localStorage.setItem('user', JSON.stringify(data2));
-        })
-      }
-    })
+    // this.apiService.ModifiyProfil(editedUser).subscribe((data: response) => {
+    //   this.data = data;
+    //   if (!data.error) {
+    //     this.apiService.userlogin(this.user.username, password).subscribe((data2: response) => {
+    //       localStorage.setItem('user', JSON.stringify(data2));
+    //     })
+    //   }
+    // })
 
   }
 

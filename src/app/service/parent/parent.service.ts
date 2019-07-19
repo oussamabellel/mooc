@@ -33,4 +33,9 @@ export class ParentService {
   Associate(data): Observable<response> {
     return this.httpClient.post<response>(`${this.PHP_API_SERVER}/v1/associer_parent.php?`, data);
   }
+
+  AddCredits(data): Observable<response> {
+    return this.httpClient.post<response>(`${this.PHP_API_SERVER}/v1/Add_credits.php?`, data);
+
+  }
 }

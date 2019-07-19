@@ -34,25 +34,12 @@ export class ApiService {
     return this.httpClient.post<response>(`${this.PHP_API_SERVER}/v1/modify_profile.php?id=${user.id}`, user);
   }
 
-  userregister(username, password, email, nom, prenom, age, type) {
-    return this.httpClient.post<any>(`${this.PHP_API_SERVER}/v1/angular.php`, {
-      username,
-      password,
-      email,
-      nom,
-      prenom,
-      age,
-      type
-    }).pipe(catchError(this.errorHandler));  // catch error
+  userregister(user) {
+    return this.httpClient.post<any>(`${this.PHP_API_SERVER}/v1/angular.php`, user).pipe(catchError(this.errorHandler));  // catch error
   }
 
-  userlogin(username, password) {
-    return this.httpClient.post<any>(`${this.PHP_API_SERVER}/v1/angular_login.php`, {
-      username,
-      password
-    }).pipe(catchError(this.errorHandler)
-
-
+  userlogin(user): Observable<response> {
+    return this.httpClient.post<any>(`${this.PHP_API_SERVER}/v1/angular_login.php`, user).pipe(catchError(this.errorHandler)
     );  // catch error
   }
 

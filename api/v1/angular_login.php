@@ -1,21 +1,21 @@
 <?php 
 
-session_start();
-
 require_once '../includes/DbOperations.php';
+error_reporting(0);
+$postdata = file_get_contents("php://input");
+$response = array();
+$_POST = json_decode($postdata, true);
 
-	$postdata = file_get_contents("php://input");
-	$response = array();
-	$request = json_decode($postdata);
-
+if($_SERVER['REQUEST_METHOD']=='POST'){
+	if(isset($_POST['username']) and isset($_POST['password'])){
 		$db = new DbOperations(); 
 		$teacher = "Teacher";
 
-		if($db->userLogin($request->username, $request->password)){
+		if($db->userLogin($_POST['username'], $_POST['password'])){
 
-			$user = $db->getUserByUsername($request->username);
+			$user = $db->getUserByUsername($_POST['username']);
 			$credits = $db->getCredits($user['id']);
-
+			
 			$response['error'] = false; 
 			$response['id'] = $user['id'];
 			$response['email'] = $user['email'];
@@ -24,8 +24,7 @@ require_once '../includes/DbOperations.php';
 			$response['prenom'] = $user['prenom'];
 			$response['age'] = $user['age'];
 			$response['type'] = $user['type'];
-
-			$_SESSION['user'] = $user['id'];
+			$response['message'] = "Authentification effectuée avec succée";
 
 			if ($response['type'] == $teacher ){
 						
@@ -38,4 +37,16 @@ require_once '../includes/DbOperations.php';
 			$response['message'] = "Invalid username or password";			
 		}
 
+	}else{
+		$response['error'] = true; 
+		$response['message'] = "Required fields are missing";
+	}
+
+} else{
+	$response['error'] = true; 
+	$response['message'] = "Invalid Request";
+}
+
 echo json_encode($response);
+
+?>
