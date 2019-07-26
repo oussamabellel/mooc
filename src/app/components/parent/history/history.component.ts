@@ -15,23 +15,11 @@ export class HistoryComponent implements AfterContentInit {
 
     this.apiparent.getHistory(this.user.id).subscribe((History: history[]) => {
       this.History = History;
-      History.forEach(element => {
-        console.log(element.value);
-      });
     })
   }
 
   History: history[];
   user: users = JSON.parse(localStorage.getItem('user'));
-
-  // ngAfterViewInit(): void {
-  //   this.apiparent.getHistory(this.user.id).subscribe((History: history[]) => {
-  //     this.History = History;
-  //     History.forEach(element => {
-  //       console.log(element.value);
-  //     });
-  //   })
-  // }
 
   constructor(private httpClient: HttpClient, private apiparent: ParentService) { }
 

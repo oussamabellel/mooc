@@ -4,12 +4,12 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2"> <span style="font-size: 1em; color: Tomato;">
-        <i class="fas fa-newspaper"></i>
-      </span> Les Résultats de chaque enfant</h1>
+        <i class="fas fa-child"></i>
+      </span> Détails des enfants</h1>
   </div>
 
   <div class="container">
-    <table class="table table-hover">
+    <table class="table table-hover" *ngIf="Childrens && Childrens?.length > 0">
       <thead class="thead-light">
         <tr>
           <th>#</th>
@@ -27,13 +27,17 @@
           <td>{{ children.prenom }}</td>
           <td>{{ children.age }} </td>
           <a [routerLink]="['./', children.id]">
-            <td><button type="submit" name="button" value="{{children.id}}" class="btn btn-success btn-sm"><i
-                  class="fas fa-external-link-alt"></i> voir résulat </button></td>
+            <td><button type="submit" name="button" value="{{children.id}}" class="btn btn-success btn-md"><i
+                  class="fas fa-external-link-alt"></i> voir détails </button></td>
           </a>
         </tr>
       </tbody>
 
     </table>
+
+    <div class="alert alert-primary" *ngIf="Childrens?.length == 0">
+      <strong> Aucun Résultat </strong>
+    </div>
   </div>
 
 </main>

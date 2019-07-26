@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Chart } from 'chart.js';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { DataTableModule } from "angular-6-datatable";
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,6 +40,10 @@ import { LoginComponent } from './components/login/login.component';
 import { from } from 'rxjs';
 import { ChildrenresultComponent } from './components/parent/childrenresult/childrenresult.component';
 import { AddcreditsComponent } from './components/parent/addcredits/addcredits.component';
+import { ResultsdetailsComponent } from './components/student/resultsdetails/resultsdetails.component';
+import { SubscribeComponent } from './components/parent/subscribe/subscribe.component';
+import { AbonnementComponent } from './components/parent/abonnement/abonnement.component';
+import { SubscribtionComponent } from './components/student/subscribtion/subscribtion.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,11 +75,16 @@ import { AddcreditsComponent } from './components/parent/addcredits/addcredits.c
     LoginComponent,
     ChildrenresultComponent,
     AddcreditsComponent,
+    ResultsdetailsComponent,
+    SubscribeComponent,
+    AbonnementComponent,
+    SubscribtionComponent,
 
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    DataTableModule,
     FormsModule,
     AppRoutingModule,
     NgbModule

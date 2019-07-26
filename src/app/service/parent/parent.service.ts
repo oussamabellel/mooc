@@ -5,10 +5,20 @@ import { Observable } from 'rxjs';
 import { users } from 'src/app/model/users';
 import { history } from 'src/app/model/history';
 import { response } from 'src/app/model/response';
+import { niveau } from 'src/app/model/niveau';
+
+
+interface res {
+  result: number;
+  nom: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
+
+
+
 export class ParentService {
 
   PHP_API_SERVER = "http://127.0.0.1/edsa-api";
@@ -36,6 +46,22 @@ export class ParentService {
 
   AddCredits(data): Observable<response> {
     return this.httpClient.post<response>(`${this.PHP_API_SERVER}/v1/Add_credits.php?`, data);
-
   }
+
+  GetAllLevel(id): Observable<niveau[]> {
+    return this.httpClient.get<niveau[]>(`${this.PHP_API_SERVER}/v1/getalllevel.php?id=${id}`);
+  }
+
+  Subscribe(data): Observable<response> {
+    return this.httpClient.post<response>(`${this.PHP_API_SERVER}/v1/subscribe.php?id=${data.id}`, data);
+  }
+
+  GetModuleResult(id, id_module): Observable<res[]> {
+    return this.httpClient.get<res[]>(`${this.PHP_API_SERVER}/v1/getModuleResult.php?id=${id}&id_module=${id_module}`);
+  }
+
+  GetLastChildrenConnexion(id): Observable<connexion[]> {
+    return this.httpClient.get<connexion[]>(`${this.PHP_API_SERVER}/v1/GetLastConnexionChildren.php?id=${id}`);
+  }
+
 }

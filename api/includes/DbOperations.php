@@ -46,12 +46,6 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 
 		
 			public function isUserExistAjax_username($username){
-			// $stmt = $this->con->prepare("SELECT id FROM users WHERE username = ?");
-			// $stmt->bind_param("s", $username);
-			// $stmt->execute(); 
-			// $stmt->store_result(); 
-			// return $stmt->num_rows; 
-
 			$sql = "SELECT * FROM users WHERE username='$username'";
 			$results = mysqli_query($this->con, $sql);
 			return $results;
@@ -105,8 +99,24 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 			return $stmt->get_result()->fetch_assoc();
 		}
 
+		public function GetFullHistory($id)
+		{
+			# code...
+			$stmt = $this->con->prepare("SELECT history.date, history.description FROM history WHERE history.id_personne = ? ");
+			
+			$stmt->bind_param("i", $id);
+			$stmt->execute();
+			$stmt->bind_result($date ,$description);
+			$users = array();
+			while ($stmt->fetch()){
+				$user=array();
+				$user['date'] = $date;
+				$user['description'] = $description;
+				array_push($users, $user);
+			}
+			return $users;
+		}
 
-	
 
 		public function getAllusers()
 		{
@@ -258,13 +268,15 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 			return $users;
 		}
 
+		
+
 		public function ModuleToBuy($id_etudiant)
 		{
 			# code...
 
-			$stmt = $this->con->prepare("SELECT module.id, module.matiere, module.price FROM module,famille WHERE module.id NOT IN (SELECT etudiantmodule.id_module FROM etudiantmodule WHERE etudiantmodule.id_etudiant = ?) AND ( module.price <= famille.credits ) AND ( famille.id_enfant = ? )");
+			$stmt = $this->con->prepare("SELECT module.id, module.matiere, module.price FROM module,famille WHERE module.id NOT IN (SELECT etudiantmodule.id_module FROM etudiantmodule WHERE etudiantmodule.id_etudiant = ?) AND ( module.price <= famille.credits ) AND ( famille.id_enfant = ? ) AND module.id NOT IN ( SELECT DISTINCT module.id FROM module, moduleniveau, niveau, abonnement, users WHERE abonnement.id_niveau = niveau.id AND niveau.id = moduleniveau.id_niveau AND abonnement.id_personne = ? AND module.id = moduleniveau.id_module )");
 
-			$stmt->bind_param("ii",$id_etudiant,$id_etudiant);
+			$stmt->bind_param("iii",$id_etudiant,$id_etudiant,$id_etudiant);
 			$stmt->execute();
 			$stmt->bind_result($id,$matiere,$price);
 			$users = array();
@@ -341,14 +353,18 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 			$stmt = $this->con->prepare("SELECT * FROM historique WHERE id_personne = ?");
 			$stmt->bind_param("i",$id_personne);
 			$stmt->execute();
-			$stmt->bind_result($id,$idperonne,$type,$value);
+			$stmt->bind_result($id,$idperonne,$type,$value, $date);
 			$users = array();
+			
 			while ($stmt->fetch()){
+
 				$user=array();
+
 				$user['id_personne'] = $idperonne;
 				$user['id'] = $id;
 				$user['type'] = $type;
 				$user['value'] = $value;
+				$user['date'] = $date;
 				
 				array_push($users, $user);
 			}
@@ -361,6 +377,19 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 			# code...
 			$stmt = $this->con->prepare("INSERT INTO `connexion`(`id`, `id_personne`, `date`) VALUES (NULL, ?, Now())");
 				$stmt->bind_param("i",$id_personne);
+				if ($stmt->execute()){
+					return 1;
+				}else{
+					return 2;
+				}
+
+		}
+
+		public function AddHistoryDetails($id_personne, $describtion)
+		{
+			# code...
+			$stmt = $this->con->prepare("INSERT INTO `history` (`id`, `id_personne`, `description`, `date`) VALUES (NULL, ?, ?, Now())");
+				$stmt->bind_param("is",$id_personne, $describtion);
 				if ($stmt->execute()){
 					return 1;
 				}else{
@@ -388,6 +417,29 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 			}
 			return $users;
 		}
+
+		public function GetLastConnexionChildren($id_enfant)
+		{
+			# code...	
+			$stmt = $this->con->prepare("SELECT DISTINCT users.nom, users.prenom, connexion.id, connexion.date FROM connexion, users WHERE connexion.id_personne = ? AND users.id = connexion.id_personne ORDER BY connexion.date DESC LIMIT 10");
+
+			$stmt->bind_param("i",$id_enfant);
+			$stmt->execute();
+			$stmt->bind_result($nom,$prenom,$id, $date);
+			$users = array();
+			while ($stmt->fetch()){
+				$user=array();
+				$user['nom'] = $nom;
+				$user['prenom'] = $prenom;
+				$user['id'] = $id;
+				$user['date'] = $date;
+				
+				array_push($users, $user);
+			}
+			return $users;
+		}
+
+
 		public function get_last_cours($id_etudiant)
 		{
 			# code...	
@@ -488,6 +540,9 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 			return $users;
 		}
 
+		// SELECT DISTINCT module.id, module.matiere from module, moduleniveau, niveau WHERE niveau.niveau = 'M2' AND niveau.id = moduleniveau.id_niveau AND module.id = moduleniveau.id_module
+
+			
 		public function getParent($id_enfant)
 		{
 			# code...
@@ -568,7 +623,79 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 			}
 			return $users;
 		}
+		public function getModuleOfLevel($niveau){
 
+			# code...
+			$stmt = $this->con->prepare("SELECT DISTINCT module.id, module.matiere, module.price from module, moduleniveau, niveau WHERE niveau.niveau = '?' AND niveau.id = moduleniveau.id_niveau AND module.id = moduleniveau.id_module");
+			
+			$stmt->bind_param("s",$niveau);
+			$stmt->execute();
+			$stmt->bind_result($id,$matiere,$price);
+			$users = array();
+			while ($stmt->fetch()){
+
+				$user = array();
+
+				$user['id'] = $id;
+				$user['matiere']= $matiere;
+				$user['price'] = $price;
+
+				array_push($users, $user);
+			}
+			return $users;
+		}
+
+		public function getAllLevel($id_personne){
+			# code...
+			$stmt = $this->con->prepare("SELECT * FROM niveau WHERE niveau.id NOT IN (SELECT abonnement.id_niveau FROM abonnement WHERE abonnement.id_personne = ?) ");
+			$stmt->bind_param("i",$id_personne);
+			$stmt->execute();
+			$stmt->bind_result($id,$niveau);
+			$users = array();
+			while ($stmt->fetch()){
+
+				$user = array();
+
+				$user['id'] = $id;
+				$user['niveau']= $niveau;
+
+				array_push($users, $user);
+			}
+			return $users;
+		}
+
+		public function GetModuleOfSubscription($id_personne) {
+
+			$stmt = $this->con->prepare("SELECT DISTINCT module.id, module.matiere, module.price FROM module, moduleniveau, niveau, abonnement, users WHERE abonnement.id_niveau = niveau.id AND niveau.id = moduleniveau.id_niveau AND abonnement.id_personne = ? AND module.id = moduleniveau.id_module");
+			$stmt->bind_param("i",$id_personne);
+			$stmt->execute();
+			$stmt->bind_result($id,$matiere,$price);
+			$users = array();
+			while ($stmt->fetch()){
+
+				$user = array();
+
+				$user['id'] = $id;
+				$user['matiere']= $matiere;
+				$user['price'] = $price;
+
+				array_push($users, $user);
+			}
+			return $users;
+		}
+		
+		public function Subscribe ($id_niveau, $id_personne) {
+			
+			$stmt = $this->con->prepare("INSERT INTO `abonnement` (`id_personne`, `id_niveau`) VALUES (?, ?);");
+			$stmt->bind_param("ii",$id_niveau,$id_personne);
+			if ($stmt->execute()){
+				return 1;
+			}else{
+				return 2;
+			}
+		}
+
+		
 		public function DeleteQcm($id)
 		{
 			# code...
@@ -604,6 +731,24 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 			}
 			return $users;
 		}
+		
 
+		public function getModuleResult($id, $id_module){
+			
+			$stmt = $this->con->prepare("SELECT etudiantqcm.result, qcm.nom FROM etudiantqcm, qcm WHERE etudiantqcm.id_etudiant = ? AND qcm.id = etudiantqcm.id_qcm AND qcm.id_module = ?");
+			
+			$stmt->bind_param("is",$id,$id_module);
+			$stmt->execute();
+			$stmt->bind_result($result, $nom);
+			$users = array();
+			while ($stmt->fetch()){
+
+				$user = array();
+				$user['result'] = $result;
+				$user['nom']= $nom;
+				array_push($users, $user);
+			}
+			return $users;
+		}
 
 	}

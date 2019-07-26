@@ -25,7 +25,9 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 			$response['age'] = $user['age'];
 			$response['type'] = $user['type'];
 			$response['message'] = "Authentification effectuée avec succée";
-
+			
+			$rs = $db->Add_to_connexion($user['id']);
+			
 			if ($response['type'] == $teacher ){
 						
 			}else {

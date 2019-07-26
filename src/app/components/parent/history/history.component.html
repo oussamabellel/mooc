@@ -15,9 +15,10 @@
       <table class="table table-hover">
         <thead class="thead-light">
           <tr>
-            <th>#</th>
-            <th>Type </th>
-            <th>Date</th>
+            <th> # </th>
+            <th> Type </th>
+            <th> Valeur </th>
+            <th> Date </th>
           </tr>
         </thead>
 
@@ -26,13 +27,14 @@
             <td> {{ history.id }} </td>
             <td> {{ history.type }} </td>
             <td> {{ history.value }} </td>
+            <td> {{ history.date }} </td>
           </tr>
         </tbody>
 
       </table>
     </div>
 
-    <div *ngIf="!History" class="alert alert-primary">
+    <div *ngIf="History?.length  == 0" class="alert alert-primary">
       <strong> Aucun Résultat </strong>
     </div>
 

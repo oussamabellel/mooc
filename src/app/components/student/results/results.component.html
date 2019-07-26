@@ -9,8 +9,10 @@
   </div>
 
   <div class="container">
+    <!-- <div *ngIf="!Results">
 
-    <div *ngIf="Results?.length > 0; else elseBlock">
+    </div> -->
+    <div *ngIf="Results && Results?.length > 0">
       <table class="table table-hover">
         <thead>
           <tr>
@@ -18,20 +20,18 @@
             <th>Nom de qcm</th>
             <th>Date</th>
             <th>Résultat</th>
-            <th></th>
           </tr>
         </thead>
-
         <tbody>
           <ng-container *ngFor="let result of Results">
-            <tr *ngIf="result.result < 50; else elseGood" class="table-danger">
+            <tr *ngIf="result.result < 50; else elseGood" class="table-danger" (click)="ShowDetails(result)">
               <td> {{ result.id_module }} </td>
               <td> {{ result.nom }} </td>
               <td> {{ result.date }} </td>
               <td> {{ result.result+"%" }} </td>
             </tr>
             <ng-template #elseGood>
-              <tr class="table-success">
+              <tr class="table-success" (click)="ShowDetails(result)">
                 <td> {{ result.id_module }} </td>
                 <td> {{ result.nom }} </td>
                 <td> {{ result.date }} </td>
@@ -43,11 +43,12 @@
 
       </table>
     </div>
-    <ng-template #elseBlock>
-      <div class="alert alert-primary">
-        <strong> Aucun Résultat </strong>
-      </div>
-    </ng-template>
+
+    <div *ngIf="Results?.length == 0" class="alert alert-primary">
+      <strong> Aucun Résultat </strong>
+    </div>
+
+    <app-resultsdetails *ngIf="result"></app-resultsdetails>
 
   </div>
 

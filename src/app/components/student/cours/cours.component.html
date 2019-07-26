@@ -6,7 +6,7 @@
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2"> <span style="font-size: 1em; color: deeppink;">
         <i class="fas fa-file"></i>
-      </span> Cours </h1>
+      </span> Cours - {{ id_module }} </h1>
   </div>
 
   <div class="container">
@@ -90,6 +90,43 @@
           </ngb-accordion>
         </ng-template>
       </ngb-tab>
+
+      <ngb-tab>
+        <ng-template ngbTabTitle> <i class="far fa-file-pdf"></i> Documents </ng-template>
+        <ng-template ngbTabContent>
+          <br>
+          <table *ngIf="Cours && Cours?.length > 0" class="table table-hover">
+            <thead class="thead-light">
+              <tr>
+                <th>Titre</th>
+                <th>Type</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let cour of Cours">
+
+                <td>{{ cour.nom }}</td>
+                <td *ngIf="cour.type == 'pdf'"> <span style="font-size: 2em; color: Tomato;">
+                    <i class="far fa-file-pdf"></i>
+                  </span> </td>
+                <td *ngIf="cour.type == 'video'"> <i class="fas fa-video"></i> </td>
+                <td><button type="submit" name="button" value="{{cour.lien}}" (click)="open(cour)"
+                    class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Open</button></td>
+              </tr>
+            </tbody>
+
+          </table>
+
+          <div *ngIf="Cours?.length == 0" class="alert alert-primary">
+            <strong> Aucun Résultat </strong>
+          </div>
+
+        </ng-template>
+
+      </ngb-tab>
+
+
       <ngb-tab>
         <ng-template ngbTabTitle> <i class='fas fa-film'></i> Video</ng-template>
         <ng-template ngbTabContent>
@@ -101,16 +138,22 @@
                   <iframe width="100%" height="230" src="https://www.youtube.com/embed/XpB4SZCgIv0" frameborder="0"
                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
+                  <label class="form-control label-warning text-xs-center">title</label>
+
                 </div>
                 <div class="col-md-4 pb-video">
                   <iframe width="100%" height="230" src="https://www.youtube.com/embed/Mng0OB3JHmg" frameborder="0"
                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
+                  <label class="form-control label-warning text-xs-center">title</label>
+
                 </div>
                 <div class="col-md-4 pb-video">
                   <iframe width="100%" height="230" src="https://www.youtube.com/embed/M6pi6jXpRrs" frameborder="0"
                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
+                  <label class="form-control label-warning text-xs-center">title</label>
+
                 </div>
               </div>
               <div class="row pb-row">
@@ -119,16 +162,22 @@
                   <iframe width="100%" height="230" src="https://www.youtube.com/embed/dFlPARW5IX8" frameborder="0"
                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
+                  <label class="form-control label-warning text-xs-center">title</label>
+
                 </div>
                 <div class="col-md-4 pb-video">
                   <iframe width="100%" height="230" src="https://www.youtube.com/embed/IvVhGmWxXvg" frameborder="0"
                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
+                  <label class="form-control label-warning text-xs-center">title</label>
+
                 </div>
                 <div class="col-md-4 pb-video">
                   <iframe width="100%" height="230" src="https://www.youtube.com/embed/lF5m4o_CuNg" frameborder="0"
                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
+                  <label class="form-control label-warning text-xs-center">title</label>
+
                 </div>
               </div>
             </div>
@@ -199,6 +248,8 @@
           </form>
         </ng-template>
       </ngb-tab>
+
+
 
 
     </ngb-tabset>

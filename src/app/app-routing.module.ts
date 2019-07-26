@@ -25,6 +25,8 @@ import { CreateaccountComponent } from './components/parent/createaccount/create
 import { HistoryComponent } from './components/parent/history/history.component';
 import { ChildrenresultComponent } from './components/parent/childrenresult/childrenresult.component';
 import { AddcreditsComponent } from './components/parent/addcredits/addcredits.component';
+import { SubscribeComponent } from './components/parent/subscribe/subscribe.component';
+import { SubscribtionComponent } from './components/student/subscribtion/subscribtion.component';
 
 const routes: Routes = [
 
@@ -42,7 +44,9 @@ const routes: Routes = [
       { path: 'progression', component: ProgressionComponent },
       { path: 'results', component: ResultsComponent },
       { path: 'profil', component: ProfilComponent },
-      { path: 'cours', component: CoursComponent }
+      { path: 'cours', component: CoursComponent },
+      { path: 'mysubs', component: SubscribtionComponent },
+      { path: 'mysubs/:id', component: CoursComponent }
     ]
   },
   {
@@ -50,7 +54,8 @@ const routes: Routes = [
     component: ParentComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: '', component: ChildconnexionComponent, pathMatch: 'full' },
+      { path: '', component: ChildresultsComponent, pathMatch: 'full' },
+      { path: './:id', component: ChildrenresultComponent },
       { path: 'childconx', component: ChildconnexionComponent },
       { path: 'childresults', component: ChildresultsComponent },
       { path: 'childresults/:id', component: ChildrenresultComponent },
@@ -59,7 +64,8 @@ const routes: Routes = [
       { path: 'associate', component: AssochildComponent },
       { path: 'profil', component: ProfilComponent },
       { path: 'history', component: HistoryComponent },
-      { path: 'addcredits', component: AddcreditsComponent }
+      { path: 'addcredits', component: AddcreditsComponent },
+      { path: 'subscribe', component: SubscribeComponent }
     ]
   },
   {

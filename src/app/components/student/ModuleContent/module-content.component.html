@@ -2,32 +2,39 @@
 <br>
 <br>
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-      <h1 class="h2">{{ id_module }}</h1>
-      </div>
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">{{ id_module }}</h1>
+  </div>
 
-      <div class="container">
-       
-          <table class="table">
-            <thead>
-              <tr >
-                <th>Nom</th>
-                <th>Type</th>
-              </tr>
-            </thead>
-            
-            <tbody>
-              <tr *ngFor="let cour of Cours">
-          
-                <td>{{ cour.nom }}</td>
-                <td *ngIf="cour.type == 'pdf'"> <i class="far fa-file-pdf"></i> </td>
-                <td *ngIf="cour.type == 'video'"> <i class="fas fa-video"></i> </td>
-                <td><button type="submit" name="button" value="{{cour.lien}}" (click)="open(cour.lien)" class="btn btn-primary btn-sm">Open</button></td>
-              </tr>              
-            </tbody>
-         
-          </table>
-   
-        </div>
+  <div class="container">
 
-        </main>
+    <table *ngIf="Cours && Cours?.length > 0" class="table table-hover">
+      <thead class="thead-light">
+        <tr>
+          <th>Titre</th>
+          <th>Type</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let cour of Cours">
+
+          <td>{{ cour.nom }}</td>
+          <td *ngIf="cour.type == 'pdf'"> <span style="font-size: 2em; color: Tomato;">
+              <i class="far fa-file-pdf"></i>
+            </span> </td>
+          <td *ngIf="cour.type == 'video'"> <i class="fas fa-video"></i> </td>
+          <td><button type="submit" name="button" value="{{cour.lien}}" (click)="open(cour)" class="btn btn-primary"><i
+                class="fas fa-external-link-alt"></i> Open</button></td>
+        </tr>
+      </tbody>
+
+    </table>
+
+    <div *ngIf="Cours?.length == 0" class="alert alert-primary">
+      <strong> Aucun Résultat </strong>
+    </div>
+
+  </div>
+
+</main>

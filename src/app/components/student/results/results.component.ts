@@ -11,6 +11,7 @@ import { StudentService } from 'src/app/service/student/student.service';
 export class ResultsComponent implements OnInit {
 
   Results: result[];
+  result: result;
   user: users = JSON.parse(localStorage.getItem('user'));
 
   constructor(private apistudent: StudentService) { }
@@ -21,5 +22,13 @@ export class ResultsComponent implements OnInit {
       this.Results = Results;
     })
   }
+
+  ShowDetails(result) {
+    console.log(result);
+    this.result = result;
+
+  }
+
+
 
 }

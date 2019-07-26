@@ -1,0 +1,39 @@
+<br>
+<br>
+<br>
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2"> <span style="font-size: 1em; color: plum;">
+        <i class="fas fa-file"></i>
+      </span> Mon Abonnement</h1>
+  </div>
+
+  <div class="container">
+    <table *ngIf="Modules && Modules?.length > 0" class="table table-hover">
+      <thead class="thead-light">
+        <tr>
+          <th>#</th>
+          <th>Matiere</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let module of Modules">
+          <td><i class="fas fa-folder-open"></i> {{ module.id }}</td>
+          <td>{{ module.matiere }}</td>
+          <a [routerLink]="['./', module.id]">
+            <td><button type="submit" name="button" value="{{module.id}}" class="btn btn-primary btn-sm"><i
+                  class="fas fa-external-link-alt"></i> Open</button></td>
+          </a>
+        </tr>
+      </tbody>
+
+    </table>
+
+    <div *ngIf="Modules?.length == 0" class="alert alert-primary">
+      <strong> Aucun Résultat </strong>
+    </div>
+  </div>
+
+</main>

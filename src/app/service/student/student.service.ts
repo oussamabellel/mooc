@@ -6,6 +6,12 @@ import { Observable } from 'rxjs';
 import { result } from 'src/app/model/result';
 import { response } from 'src/app/model/response';
 
+
+interface historique {
+  date: string;
+  description: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -38,6 +44,17 @@ export class StudentService {
     return this.httpClient.post<response>(`${this.PHP_API_SERVER}/v1/Buy_module.php?id=${id_personne}`, module);
   }
 
+  GetModuleOfSubscribtion(id): Observable<module[]> {
+    return this.httpClient.get<module[]>(`${this.PHP_API_SERVER}/v1/GetModuleOfSubscription.php?id=${id}`);
+  }
+
+  AddToHistory(data): Observable<response> {
+    return this.httpClient.post<response>(`${this.PHP_API_SERVER}/v1/AddToHistory.php`, data);
+  }
+
+  GetFullHistory(id): Observable<historique[]> {
+    return this.httpClient.get<historique[]>(`${this.PHP_API_SERVER}/v1/GetMyChildrenFullHistory.php?id=${id}`);
+  }
 
 
 }

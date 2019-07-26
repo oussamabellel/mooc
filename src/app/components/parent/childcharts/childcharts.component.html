@@ -1,3 +1,8 @@
-<p>
-  childcharts works!
-</p>
+<div>
+  <canvas *ngIf="data && data?.length > 0" id="myChart" width="200" height="200"></canvas>
+
+  <div *ngIf="data?.length == 0" class="alert alert-primary">
+    <strong> Aucun Résultat </strong>
+  </div>
+
+</div>

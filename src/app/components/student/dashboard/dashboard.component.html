@@ -7,14 +7,9 @@
         <i class="fas fa-news-paper"></i>
       </span> Bonjour {{ user.prenom }}, bienvenue sur ton tableau de bord 👋 </h5>
   </div>
-  <div>
-    <a>
-
-    </a>
-  </div>
 
   <br>
-  <br>
+
 
   <div class="container">
     <!-- <div style="background-color:white" class="border">
@@ -82,12 +77,32 @@
 
       </div>
     </div> -->
-    <h2> Derniers documents ajoutés </h2>
+
+    <h2> Historique des activités </h2>
+    <hr>
+
     <table class="table table-hover">
       <thead class="thead-light">
         <tr>
+          <th>Date</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let hist of history">
+          <td>{{hist.date}}</td>
+          <td>{{hist.description}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <hr>
+
+    <h2> Derniers documents ajoutées </h2>
+    <table class="table table-hover" *ngIf="Cours && Cours?.length > 0">
+      <thead class="thead-light">
+        <tr>
           <th>Matiere</th>
-          <th>Nom</th>
+          <th>Titre</th>
           <th>Type</th>
           <th></th>
         </tr>
@@ -108,6 +123,11 @@
       </tbody>
 
     </table>
+
+    <div *ngIf="Cours?.length == 0" class="alert alert-primary">
+      <strong> Aucun Résultat </strong>
+    </div>
+
     <hr>
     <h2> Derniere videos ajoutés </h2>
     <br>
@@ -117,14 +137,19 @@
           <div class="col-md-4 pb-video">
             <iframe width="100%" height="230" src="https://www.youtube.com/embed/XpB4SZCgIv0" frameborder="0"
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <label class="form-control label-warning text-xs-center">title</label>
           </div>
           <div class="col-md-4 pb-video">
             <iframe width="100%" height="230" src="https://www.youtube.com/embed/Mng0OB3JHmg" frameborder="0"
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <label class="form-control label-warning text-xs-center">title</label>
+
           </div>
           <div class="col-md-4 pb-video">
             <iframe width="100%" height="230" src="https://www.youtube.com/embed/M6pi6jXpRrs" frameborder="0"
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <label class="form-control label-warning text-xs-center">title</label>
+
           </div>
         </div>
       </div>
